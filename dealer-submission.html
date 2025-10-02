@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit New Jackson Kayak Dealer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Navigation Header */
+        .main-nav {
+            background: #000;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: block;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-logo:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #F1C400;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #000;
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+        }
+        
+        /* Separator HR */
+        .nav-separator {
+            height: 2px;
+            background: #F1C400;
+            border: none;
+            margin: 0;
+        }
+        
+        /* Form Header */
+        .form-header {
+            background: #000000;
+            color: #F1C400;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .form-header h1 {
+            font-weight: 700;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            font-weight: 300;
+            font-size: 1.2em;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #000;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F1C400;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .required {
+            color: #F1C400;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #F1C400;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Categories Section */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .category-item label {
+            margin: 0;
+            font-weight: 400;
+        }
+        
+        /* Address Validation */
+        .address-validation {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .address-validation.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .address-validation.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        /* Submit Button */
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .submit-btn {
+            background: #F1C400;
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background: #d4a500;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Success Message */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .json-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="https://cdn11.bigcommerce.com/s-6xk5gybgv2/images/stencil/original/image-manager/jk-logo-white-text.png?t=1752171199" alt="Jackson Kayak">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/fishing/" class="nav-link">Fishing</a>
+                <a href="/whitewater/" class="nav-link">Whitewater</a>
+                <a href="/recreation/" class="nav-link">Recreation</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/find-your-dealer/" class="nav-link">Find Dealers</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Separator HR -->
+    <hr class="nav-separator">
+
+    <div class="form-header">
+        <h1>Dealer Management Form</h1>
+        <p>Add new dealers or remove existing dealers from the Jackson Kayak network</p>
+    </div>
+    
+    <div class="container">
+        <!-- Action Type Selection -->
+        <div class="form-card">
+            <div class="form-section">
+                <h2 class="section-title">Action Type</h2>
+                <div class="form-group">
+                    <label>
+                        <input type="radio" name="actionType" value="add" checked style="width: auto; margin-right: 8px;">
+                        Add New Dealer
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="radio" name="actionType" value="remove" style="width: auto; margin-right: 8px;">
+                        Remove Existing Dealer
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Removal Form (Hidden by default) -->
+        <form class="form-card" id="removalForm" style="display: none;">
+            <div class="form-section">
+                <h2 class="section-title">Remove Dealer</h2>
+                <div class="form-group">
+                    <label for="dealerToRemove">Dealer Name to Remove <span class="required">*</span></label>
+                    <input type="text" id="dealerToRemove" name="dealerToRemove" placeholder="Enter exact dealer name as it appears in the system" required>
+                    <p style="margin-top: 5px; color: #666; font-size: 14px;">
+                        Please enter the exact dealer name as it appears in the current dealer list
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="removalReason">Reason for Removal</label>
+                    <select id="removalReason" name="removalReason">
+                        <option value="">Select reason (optional)</option>
+                        <option value="Business closed">Business closed</option>
+                        <option value="No longer carries Jackson Kayak">No longer carries Jackson Kayak</option>
+                        <option value="Partnership ended">Partnership ended</option>
+                        <option value="Duplicate entry">Duplicate entry</option>
+                        <option value="Incorrect information">Incorrect information</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="removalNotes">Additional Notes</label>
+                    <textarea id="removalNotes" name="removalNotes" placeholder="Any additional information about the removal..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Submit Section for Removal -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit Removal Request</button>
+            </div>
+        </form>
+
+        <!-- Addition Form (Visible by default) -->
+        <form class="form-card" id="additionForm">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h2 class="section-title">Basic Information</h2>
+                
+                <div class="form-group">
+                    <label for="dealerName">Dealer Name  (ie: Delaware Paddlesports; not 'Brian Vincent')<span class="required">*</span></label>
+                    <input type="text" id="dealerName" name="name" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address - Will Receive Demo Emails if Enabled</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="website">Website URL: must include 'https://'</label>
+                    <input type="url" id="website" name="url" placeholder="https://example.com">
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-section">
+                <h2 class="section-title">Address Information</h2>
+                
+                <div class="form-group">
+                    <label for="address">Street Address <span class="required">*</span></label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address2">Address Line 2 (Suite, Unit, etc.)</label>
+                    <input type="text" id="address2" name="address2">
+                </div>
+                
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State/Province  (TN, AL, etc)<span class="required">*</span></label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">ZIP/Postal Code <span class="required">*</span></label>
+                        <input type="text" id="zip" name="zip" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country <span class="required">*</span></label>
+                    <select id="country" name="country" required>
+                        <option value="">Select Country</option>
+                        <option value="United States">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="USA">USA</option>
+                    </select>
+                </div>
+                
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                    <strong>Note:</strong> Coordinates will be added during processing. Please ensure the address is accurate and complete.
+                </p>
+            </div>
+
+            <!-- Categories -->
+            <div class="form-section">
+                <h2 class="section-title">Product Categories <span class="required">*</span></h2>
+                <p style="margin-bottom: 15px; color: #666;">Select all categories that apply to this dealer:</p>
+                
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_fishing" name="categories" value="Fishing">
+                        <label for="cat_fishing">Fishing</label>
+                    </div>
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_whitewater" name="categories" value="Whitewater">
+                        <label for="cat_whitewater">Whitewater</label>
+                    </div>
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_recreation" name="categories" value="Recreation">
+                        <label for="cat_recreation">Recreation</label>
+                    </div>
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_rentals" name="categories" value="Rentals">
+                        <label for="cat_rentals">Rentals</label>
+                    </div>
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_coolers" name="categories" value="Coolers">
+                        <label for="cat_coolers">Coolers</label>
+                    </div>
+                    <div class="category-item">
+                        <input type="checkbox" id="cat_blueskywrks" name="categories" value="Blue Sky Boatworks">
+                        <label for="cat_blueskywrks">Blue Sky Boatworks</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Availability -->
+            <div class="form-section">
+                <h2 class="section-title">Demo Availability</h2>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enableDemo" name="enable_demo" style="width: auto; margin-right: 8px;">
+                        This dealer offers product demonstrations
+                    </label>
+                    <p style="margin-top: 5px; color: #666; font-size: 14px;">
+                        Check this box if the dealer provides hands-on product demos to customers
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hidden note for coordinates -->
+            <input type="hidden" name="coordinates_note" value="Coordinates will be added during processing">
+
+            <!-- Submit Section for Addition -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit New Dealer</button>
+            </div>
+        </form>
+
+        <!-- Universal Form for Email Submission -->
+        <form id="dealerForm" style="display: none;" action="https://formspree.io/f/xkgvlqdw" method="POST">
+            <input type="hidden" name="action_type" id="actionTypeField">
+            <input type="hidden" name="dealer_data" id="dealerDataField">
+            <input type="hidden" name="_replyto" value="bvalet@jacksonkayak.com">
+            <input type="hidden" name="_subject" id="emailSubject">
+        </form>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <h3 id="successTitle">Request Submitted Successfully!</h3>
+            <p id="successText">Your dealer management request has been submitted and an email notification has been sent.</p>
+            <div id="jsonOutput" class="json-output"></div>
+            <p style="margin-top: 15px;"><strong>Next Steps:</strong> The request will be processed and the dealer database will be updated accordingly.</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile navigation toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
+
+        // Global variables
+        let currentAction = 'add';
+
+        // Handle action type changes
+        document.addEventListener('change', function(e) {
+            if (e.target.name === 'actionType') {
+                currentAction = e.target.value;
+                toggleFormSections();
+            }
+        });
+
+        function toggleFormSections() {
+            const additionForm = document.getElementById('additionForm');
+            const removalForm = document.getElementById('removalForm');
+            
+            if (currentAction === 'add') {
+                additionForm.style.display = 'block';
+                removalForm.style.display = 'none';
+            } else {
+                additionForm.style.display = 'none';
+                removalForm.style.display = 'block';
+            }
+        }
+
+        // Handle addition form submission
+        document.getElementById('additionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if at least one category is selected
+            const categories = document.querySelectorAll('input[name="categories"]:checked');
+            if (categories.length === 0) {
+                alert('Please select at least one product category.');
+                return;
+            }
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const dealerData = {};
+            
+            // Basic fields
+            dealerData.name = formData.get('name');
+            dealerData.address = formData.get('address');
+            dealerData.address2 = formData.get('address2') || '';
+            dealerData.city = formData.get('city');
+            dealerData.state = formData.get('state');
+            dealerData.zip = formData.get('zip');
+            dealerData.country = formData.get('country');
+            dealerData.phone = formData.get('phone') || '';
+            dealerData.email = formData.get('email') || '';
+            dealerData.url = formData.get('url') || '';
+            dealerData.enable_demo = formData.get('enable_demo') ? true : false;
+            
+            // Note about coordinates
+            dealerData.coordinates_note = "Coordinates will be added during processing";
+            
+            // Categories
+            const selectedCategories = [];
+            categories.forEach(checkbox => {
+                selectedCategories.push(checkbox.value);
+            });
+            dealerData.categories = selectedCategories;
+            
+            // Submit via email
+            submitDealerRequest('add', dealerData);
+        });
+
+        // Handle removal form submission
+        document.getElementById('removalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const dealerToRemove = document.getElementById('dealerToRemove').value.trim();
+            if (!dealerToRemove) {
+                alert('Please enter the dealer name to remove.');
+                return;
+            }
+            
+            const removalData = {
+                dealerName: dealerToRemove,
+                reason: document.getElementById('removalReason').value,
+                notes: document.getElementById('removalNotes').value
+            };
+            
+            // Submit via email
+            submitDealerRequest('remove', removalData);
+        });
+
+        function submitDealerRequest(action, data) {
+            // Prepare email data
+            const actionTypeField = document.getElementById('actionTypeField');
+            const dealerDataField = document.getElementById('dealerDataField');
+            const emailSubject = document.getElementById('emailSubject');
+            
+            actionTypeField.value = action;
+            dealerDataField.value = JSON.stringify(data, null, 2);
+            
+            if (action === 'add') {
+                emailSubject.value = `New Dealer Addition Request: ${data.name}`;
+            } else {
+                emailSubject.value = `Dealer Removal Request: ${data.dealerName}`;
+            }
+            
+            // Show the success message with the data
+            displaySuccess(action, data);
+            
+            // Submit the form to send email notification
+            document.getElementById('dealerForm').submit();
+        }
+
+        function displaySuccess(action, data) {
+            const jsonOutput = JSON.stringify(data, null, 2);
+            document.getElementById('jsonOutput').textContent = jsonOutput;
+            
+            const successTitle = document.getElementById('successTitle');
+            const successText = document.getElementById('successText');
+            
+            if (action === 'add') {
+                successTitle.textContent = 'New Dealer Submission Received!';
+                successText.textContent = 'The new dealer information has been formatted and is ready to add to the database (coordinates will be added during processing):';
+            } else {
+                successTitle.textContent = 'Dealer Removal Request Submitted!';
+                successText.textContent = 'The dealer removal request has been submitted:';
+            }
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+            
+            // Reset forms
+            if (action === 'add') {
+                document.getElementById('additionForm').reset();
+            } else {
+                document.getElementById('removalForm').reset();
+            }
+        }
+
+        // Auto-format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{1,3})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
